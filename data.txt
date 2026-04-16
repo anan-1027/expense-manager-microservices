@@ -1,0 +1,194 @@
+
+EXPENSE MANAGER MICROSERVICES - API TEST DATA
+
+Base URL (through Nginx):
+http://localhost
+
+--------------------------------------------------
+1. USER SERVICE
+--------------------------------------------------
+
+POST /users
+Body:
+{
+"id":1,
+"name":"Hemil Gandhi",
+"email":"hemil@gmail.com",
+"password":"123456",
+"role":"user"
+}
+
+POST /users
+{
+"id":2,
+"name":"Shubham Garg",
+"email":"shubham@gmail.com",
+"password":"shubham123",
+"role":"admin"
+}
+
+GET /users
+
+PUT /users/1
+{
+"name":"Hemil G",
+"email":"hemil_new@gmail.com"
+}
+
+DELETE /users/2
+
+
+--------------------------------------------------
+2. EXPENSE SERVICE
+--------------------------------------------------
+
+POST /expenses
+{
+"id":1,
+"title":"Groceries",
+"amount":2500,
+"category":"Food",
+"date":"2026-03-17",
+"userId":1
+}
+
+POST /expenses
+{
+"id":2,
+"title":"Uber Ride",
+"amount":350,
+"category":"Transport",
+"date":"2026-03-17",
+"userId":1
+}
+
+GET /expenses
+
+PUT /expenses/1
+{
+"title":"Supermarket",
+"amount":2800
+}
+
+DELETE /expenses/2
+
+
+--------------------------------------------------
+3. CATEGORY SERVICE
+--------------------------------------------------
+
+POST /categories
+{
+"id":1,
+"name":"Food",
+"description":"Food related expenses"
+}
+
+POST /categories
+{
+"id":2,
+"name":"Transport",
+"description":"Taxi and bus"
+}
+
+POST /categories
+{
+"id":3,
+"name":"Shopping",
+"description":"Clothes and accessories"
+}
+
+GET /categories
+
+PUT /categories/1
+{
+"name":"Food & Dining"
+}
+
+DELETE /categories/3
+
+
+--------------------------------------------------
+4. BUDGET SERVICE
+--------------------------------------------------
+
+POST /budgets
+{
+"id":1,
+"category":"Food",
+"monthlyLimit":10000,
+"month":"March",
+"year":2026
+}
+
+POST /budgets
+{
+"id":2,
+"category":"Transport",
+"monthlyLimit":3000,
+"month":"March",
+"year":2026
+}
+
+GET /budgets
+
+PUT /budgets/1
+{
+"monthlyLimit":12000
+}
+
+DELETE /budgets/2
+
+
+--------------------------------------------------
+5. REPORT SERVICE
+--------------------------------------------------
+
+POST /reports
+{
+"id":1,
+"userId":1,
+"totalExpense":2850,
+"month":"March",
+"year":2026
+}
+
+POST /reports
+{
+"id":2,
+"userId":1,
+"totalExpense":5200,
+"month":"February",
+"year":2026
+}
+
+GET /reports
+
+PUT /reports/1
+{
+"totalExpense":3000
+}
+
+DELETE /reports/2
+
+
+--------------------------------------------------
+ACTIVE MQ DASHBOARD
+
+http://localhost:8161
+
+username: admin
+password: admin
+
+
+--------------------------------------------------
+DEMO FLOW FOR PRACTICAL
+
+1. POST User
+2. POST Category
+3. POST Expense
+4. POST Budget
+5. POST Report
+6. Show ActiveMQ queue
+7. Show Docker containers using:
+   docker ps

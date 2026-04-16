@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Manager | Premium Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Expense Manager</h1>
+            <p>Seamless Microservices Management Dashboard</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon income"><i class="fas fa-arrow-up"></i></div>
+                <div class="stat-info">
+                    <label>Total Budget</label>
+                    <h3 id="stat-budget">₹0.00</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon expense"><i class="fas fa-arrow-down"></i></div>
+                <div class="stat-info">
+                    <label>Total Expenses</label>
+                    <h3 id="stat-expenses">₹0.00</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon active"><i class="fas fa-users"></i></div>
+                <div class="stat-info">
+                    <label>Total Users</label>
+                    <h3 id="stat-users">0</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <!-- User Service -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-user-plus"></i> User Service</h2>
+                </div>
+                <form id="user-form">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="user-name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="user-email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="user-password" required>
+                    </div>
+                    <button type="submit" class="btn primary full-width">Add User</button>
+                </form>
+                <div class="result-list" id="users-result"></div>
+            </div>
+
+            <!-- Expense Service -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-receipt"></i> Expense Service</h2>
+                </div>
+                <form id="expense-form">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="expense-title" required placeholder="Lunch">
+                    </div>
+                    <div class="form-group">
+                        <label>Amount</label>
+                        <input type="number" id="expense-amount" required step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="expense-category" required>
+                            <option value="">Select Category...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="expense-date" required>
+                    </div>
+                    <button type="submit" class="btn primary full-width">Add Expense</button>
+                </form>
+                <div class="result-list" id="expenses-result"></div>
+            </div>
+
+            <!-- Category Service -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-tags"></i> Category Service</h2>
+                </div>
+                <form id="category-form">
+                    <div class="form-group">
+                        <label>Category Name</label>
+                        <input type="text" id="category-name" required placeholder="Food">
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select id="category-type">
+                            <option value="Expense">Expense</option>
+                            <option value="Income">Income</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn primary full-width">Save Category</button>
+                </form>
+                <div class="result-list" id="categories-result"></div>
+            </div>
+
+            <!-- Budget Service -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-sack-dollar"></i> Budget Service</h2>
+                </div>
+                <form id="budget-form">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <input type="text" id="budget-category" required placeholder="Food">
+                    </div>
+                    <div class="form-group">
+                        <label>Limit</label>
+                        <input type="number" id="budget-limit" required step="0.01">
+                    </div>
+                    <button type="submit" class="btn primary full-width">Set Budget</button>
+                </form>
+                <div class="result-list" id="budgets-result"></div>
+            </div>
+
+            <!-- Report Service -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-file-invoice-dollar"></i> Report Service</h2>
+                </div>
+                <form id="report-form">
+                    <div class="form-group">
+                        <label>Total Value</label>
+                        <input type="number" id="report-total" required step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Report Date</label>
+                        <input type="date" id="report-date" required>
+                    </div>
+                    <button type="submit" class="btn primary full-width">Log Report</button>
+                </form>
+                <div class="result-list" id="reports-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Feedback Overlay -->
+    <div id="toast" class="toast">Success! Data stored.</div>
+
+    <script src="app.js"></script>
+</body>
+</html>

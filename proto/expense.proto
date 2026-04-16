@@ -1,0 +1,16 @@
+
+syntax = "proto3";
+
+service ExpenseService {
+  rpc GetExpense (ExpenseRequest) returns (ExpenseResponse);
+}
+
+message ExpenseRequest {
+  int32 id = 1;
+}
+
+message ExpenseResponse {
+  int32 id = 1;
+  string title = 2;
+  double amount = 3;
+}

@@ -1,0 +1,120 @@
+
+version: "3.9"
+
+services:
+
+  mongodb:
+    image: mongo:6
+    ports: []
+    volumes:
+      - mongo_data:/data/db
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: expense_manager
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports: []
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  activemq:
+    image: rmohr/activemq
+    ports: []
+
+  frontend-service:
+    image: nginx:alpine
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - user-service
+      - expense-service
+      - category-service
+      - budget-service
+      - report-service
+      - frontend-service
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "3001:3000"
+    depends_on:
+      - mysql
+      - mongodb
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DB=expense_manager
+      - MONGO_URI=mongodb://mongodb:27017/expense_manager
+
+  expense-service:
+    build: ./expense-service
+    ports:
+      - "3002:3000"
+    depends_on:
+      - mysql
+      - mongodb
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DB=expense_manager
+      - MONGO_URI=mongodb://mongodb:27017/expense_manager
+
+  category-service:
+    build: ./category-service
+    ports:
+      - "3003:3000"
+    depends_on:
+      - mysql
+      - mongodb
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DB=expense_manager
+      - MONGO_URI=mongodb://mongodb:27017/expense_manager
+
+  budget-service:
+    build: ./budget-service
+    ports:
+      - "3004:3000"
+    depends_on:
+      - mysql
+      - mongodb
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DB=expense_manager
+      - MONGO_URI=mongodb://mongodb:27017/expense_manager
+
+  report-service:
+    build: ./report-service
+    ports:
+      - "3005:3000"
+    depends_on:
+      - mysql
+      - mongodb
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DB=expense_manager
+      - MONGO_URI=mongodb://mongodb:27017/expense_manager
+
+volumes:
+  mongo_data:
+  mysql_data:
